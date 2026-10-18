@@ -85,3 +85,24 @@ O save leva junto todos os `*.tmp` da pasta do jogo, em ordem de nome. Um arquiv
 Resultados de 17/10/2026:
 - **save de 2,55 GB**, com 187 itens além de 2 GB: carregou com a correção; sem ela, erro `Friendly.cpp`;
 - **`.qst` de 2,38 GB:** a original grava 0xFFFFFFFF nas posições além de 2 GB, e com a correção o índice sai certo.
+
+### As provas
+
+O save de teste de 2,55 GB na pasta do jogo (o `TesteMais2GB.sav`, ao lado de saves normais de 200–250 MB) e as suas propriedades no Windows:
+
+![Pasta do jogo com o save de 2,37 GB](img/save_2gb_pasta.png)
+
+![Propriedades do save: 2,37 GB (2.550.919.916 bytes)](img/save_2gb_propriedades.png)
+
+O índice desse save, lido de fora do jogo: as posições passam de 2 GB e seguem em sequência até o fim do arquivo. Embaixo, o mesmo ponto num `.qst` gravado pela original, com a posição estragada:
+
+```
+TesteMais2GB.sav: 2,550,919,916 bytes, tipo 3, 249 itens, 187 alem de 2 GB, indice OK
+   posicao        tamanho  nome
+  2,481,211,007     23,513  1ª Divisão Alemã_16.tmp
+  2,481,234,520     29,385  1ª Divisão Argentina_63.tmp
+  2,481,263,905     21,848  1ª Divisão Belga_0.tmp
+  ...
+.qst gravado pela original (sem a correção):
+  0000_enchimento.tmp termina em 0x8bc3cf3c, 1ª Divisão Inglesa_8.tmp começa em 0xffffffff
+```

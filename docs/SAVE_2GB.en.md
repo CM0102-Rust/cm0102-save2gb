@@ -85,3 +85,24 @@ The save takes along every `*.tmp` in the game folder, in name order. A large fi
 Results from 2026-10-17:
 - **2.55 GB save**, with 187 items beyond 2 GB: loaded with the fix; without it, error `Friendly.cpp`;
 - **2.38 GB `.qst`:** the original writes 0xFFFFFFFF in the positions beyond 2 GB, and with the fix the index comes out right.
+
+### The proofs
+
+The 2.55 GB test save in the game folder (`TesteMais2GB.sav`, next to normal 200–250 MB saves) and its properties in Windows (Portuguese Windows: "Tamanho" = size):
+
+![Game folder with the 2.37 GB save](img/save_2gb_pasta.png)
+
+![Save properties: 2.37 GB (2,550,919,916 bytes)](img/save_2gb_propriedades.png)
+
+That save's index, read from outside the game: the positions go past 2 GB and stay in sequence up to the end of the file. Below, the same spot in a `.qst` written by the original, with the broken position (the tool prints in Portuguese: "posicao" = position, "tamanho" = size, "nome" = name):
+
+```
+TesteMais2GB.sav: 2,550,919,916 bytes, tipo 3, 249 itens, 187 alem de 2 GB, indice OK
+   posicao        tamanho  nome
+  2,481,211,007     23,513  1ª Divisão Alemã_16.tmp
+  2,481,234,520     29,385  1ª Divisão Argentina_63.tmp
+  2,481,263,905     21,848  1ª Divisão Belga_0.tmp
+  ...
+.qst gravado pela original (sem a correção):
+  0000_enchimento.tmp termina em 0x8bc3cf3c, 1ª Divisão Inglesa_8.tmp começa em 0xffffffff
+```
