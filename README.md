@@ -35,6 +35,8 @@ Get **`save2gb-1.0.zip`** from the [Releases](../../releases) page.
 | CLZ 25-26 (NickPatcher), without save2gb | — | **error** |
 | CLZ 25-26 (NickPatcher), with save2gb | 2.45 GB save, index correct | **loads normally** |
 
+Screenshots and the test save's index: [`docs/SAVE_2GB.en.md`, "The proofs"](docs/SAVE_2GB.en.md#the-proofs).
+
 ## For patch maintainers
 
 The cause, the container format, the three routines involved (`zopen` 0x9326e0, `zseek` 0x933080, `ztell` 0x933170) and three ways to integrate the fix into your patch are in [`docs/SAVE_2GB.en.md`](docs/SAVE_2GB.en.md). In short: ship the DLL, `LoadLibrary` it from your own DLL, or rewrite the three routines.

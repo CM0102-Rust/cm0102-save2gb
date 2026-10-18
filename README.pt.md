@@ -35,6 +35,8 @@ O `cm0102_GDI.exe` não usa a `ddraw.dll`, então a correção não vale para el
 | CLZ 25-26 (NickPatcher), sem o save2gb | — | **erro** |
 | CLZ 25-26 (NickPatcher), com o save2gb | save de 2,45 GB, índice correto | **carrega normalmente** |
 
+Imagens e o índice do save de teste: [`docs/SAVE_2GB.md`, "As provas"](docs/SAVE_2GB.md#as-provas).
+
 ## Para quem mantém patches
 
 A causa, o formato do contêiner, as três rotinas envolvidas (`zopen` 0x9326e0, `zseek` 0x933080, `ztell` 0x933170) e três formas de integrar a correção no seu patch estão em [`docs/SAVE_2GB.md`](docs/SAVE_2GB.md). Em resumo: distribuir a DLL, carregá-la com `LoadLibrary` de dentro da sua DLL, ou reescrever as três rotinas.
