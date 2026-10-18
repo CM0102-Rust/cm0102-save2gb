@@ -39,11 +39,17 @@ O `cm0102_GDI.exe` não usa a `ddraw.dll`, então a correção não vale para el
 
 A causa, o formato do contêiner, as três rotinas envolvidas (`zopen` 0x9326e0, `zseek` 0x933080, `ztell` 0x933170) e três formas de integrar a correção no seu patch estão em [`docs/SAVE_2GB.md`](docs/SAVE_2GB.md). Em resumo: distribuir a DLL, carregá-la com `LoadLibrary` de dentro da sua DLL, ou reescrever as três rotinas.
 
-O código-fonte está disponível a pedido: abra uma issue ou mande mensagem para **lucastmpacheco** no [fórum champman0102](https://champman0102.net).
+Dúvidas ou ajuda para integrar: abra uma issue ou mande mensagem para **lucastmpacheco** no [fórum champman0102](https://champman0102.net).
 
 Ferramentas em [`tools/`](tools):
 - `assinatura_save.py` diz se a DLL vai agir num exe;
 - `enchimento.py` cria o enchimento de 2,2 GB usado para testar um save acima de 2 GB sem jogar anos.
+
+## Código-fonte
+
+O fonte de cada release está neste repositório (`src/`, `Cargo.toml`): `src/conteiner.rs` traz as três rotinas reescritas, `src/lib.rs` a conferência da assinatura, os desvios e o repasse do `DirectDrawCreate`. O código e os comentários estão em português, como no resto do projeto. O repositório é atualizado a cada release, não a cada mudança.
+
+Compilar (Windows, Rust com o alvo de 32 bits): `rustup target add i686-pc-windows-msvc` e depois `cargo build --release`. A DLL sai em `target/i686-pc-windows-msvc/release/ddraw.dll`. O hash difere do da release porque o compilador embute caminhos de pasta; o código é o mesmo.
 
 ## Sobre
 

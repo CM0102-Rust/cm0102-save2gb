@@ -39,11 +39,17 @@ Get **`save2gb-1.0.zip`** from the [Releases](../../releases) page.
 
 The cause, the container format, the three routines involved (`zopen` 0x9326e0, `zseek` 0x933080, `ztell` 0x933170) and three ways to integrate the fix into your patch are in [`docs/SAVE_2GB.en.md`](docs/SAVE_2GB.en.md). In short: ship the DLL, `LoadLibrary` it from your own DLL, or rewrite the three routines.
 
-The source code is available on request: open an issue, or message **lucastmpacheco** on the [champman0102 forum](https://champman0102.net).
+Questions or help integrating: open an issue, or message **lucastmpacheco** on the [champman0102 forum](https://champman0102.net).
 
 Tools in [`tools/`](tools):
 - `assinatura_save.py` tells whether the DLL will act on an exe;
 - `enchimento.py` creates the 2.2 GB filler used to test a save above 2 GB without playing for years.
+
+## Source code
+
+The source of each release is in this repository (`src/`, `Cargo.toml`): `src/conteiner.rs` has the three rewritten routines, `src/lib.rs` the signature check, the hooks and the `DirectDrawCreate` forwarding. The code and its comments are in Portuguese, like the rest of the project. The repository is updated at each release, not at every change.
+
+Build (Windows, Rust with the 32-bit target): `rustup target add i686-pc-windows-msvc`, then `cargo build --release`. The DLL comes out in `target/i686-pc-windows-msvc/release/ddraw.dll`. Its hash differs from the release's because the compiler embeds folder paths; the code is the same.
 
 ## About
 

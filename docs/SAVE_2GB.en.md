@@ -32,7 +32,7 @@ The other container functions (`zread` 0x932c30, `zwrite` 0x932e10, `zclose` 0x9
 
 ## The fix
 
-The three routines were rewritten in Rust (the source code is available on request):
+The three routines were rewritten in Rust (`src/conteiner.rs`):
 - positions treated as unsigned;
 - seek and tell through Windows' `SetFilePointer`, with the 64-bit high part, repeating what the CRT's `fseek`/`ftell` do with the `FILE`: flushing the buffer, read and write flags, end of file in the file table, discounting the buffer in the position;
 - **the format does not change**: a save of up to 2 GB written with the fix opens in a game without it;
@@ -69,7 +69,7 @@ The release ships a `ddraw.dll` of ~190 KB.
 There are three ways to integrate:
 1. **Ship the DLL as is**, alongside the patch.
 2. **Load the DLL from your own code.** The hooking happens on load, whatever the file name. Rename it to, for example, `save2gb.dll` and call `LoadLibrary("save2gb.dll")` from your DLL, such as `NickDLL`. In that case its `DirectDrawCreate` is not used.
-3. **Rewrite the three routines in your code**, with the description above and the source code as reference (on request): in `fseek`/`ftell`, swap the `long` for an unsigned position and use 64 bits.
+3. **Rewrite the three routines in your code**, with the description above and `src/conteiner.rs` as reference: in `fseek`/`ftell`, swap the `long` for an unsigned position and use 64 bits.
 
 If your patch changes bytes in 0x9326e0–0x933860, the signature does not match and the DLL stays inert. In that case, get in touch.
 

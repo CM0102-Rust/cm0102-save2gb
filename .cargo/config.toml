@@ -1,0 +1,7 @@
+[build]
+# O cm0102.exe e de 32 bits: a DLL tem de ser i686.
+target = "i686-pc-windows-msvc"
+
+[target.i686-pc-windows-msvc]
+# CRT estatica: a DLL nao depende do vcruntime instalado.
+rustflags = ["-C", "target-feature=+crt-static"]
